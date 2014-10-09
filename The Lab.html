@@ -10,21 +10,25 @@
 		</title>
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 		<script type="text/javascript">
-			var foward = 2
-			var backward = 0
-			var left = 0
-			var right = 0
+			var roomLoc = 0
+			//var foward = 2
+			//var backward = 0
+			//var left = 0
+			//var right = 0
 			var northPoints = 0
 			var eastPoints = 0
 			var westPoints = 0
 			var centerPoints = 0
 			var totalPoints = 0
+			
 			function myNorthFunction(){
           		var targetMainTextArea = document.getElementById("taMain");
           		var targetPointTextArea = document.getElementById("pointScreen");
-				if(foward > 0 && backward === 0){
-					backward +=1;
-					foward -=1;
+				//if(foward > 0 && backward === 0){
+				if(roomLoc === 0){
+					roomLoc = 1
+					//backward +=1;
+					//foward -=1;
 					enable(false,false,false,false)
 					targetMainTextArea.value = "You enter a room with four doors going in different directions.\n\n" + targetMainTextArea.value
 					if(centerPoints === 0){
@@ -33,14 +37,11 @@
 						targetPointTextArea.value = "total points: " + totalPoints
 					}else{
 						totalPoints +=0
-					//Questionable code below:
-					//}else if(backward > 0 && foward === 0){
-						//document.getElementById("mySouthBtn").disabled = false;
-						//document.getElementById("myNorthBtn").disabled = true;
 					}
 				}else{
-					backward +=1;
-					foward -=1;
+					//backward +=1;
+					//foward -=1;
+					roomLoc = 3
 					enable(true,false,true,true)
 					targetMainTextArea.value = "You go into the north door to find a room full of computers.\n\n" + targetMainTextArea.value
 					if(northPoints === 0){
@@ -54,20 +55,17 @@
 			}
 			function mySouthFunction() {
           		var targetMainTextArea = document.getElementById("taMain");
-				if(backward > 0 && foward === 0){
-					backward -=1;
-					foward +=1;
+				//if(backward > 0 && foward === 0){
+				if(roomLoc === 3){
+					//backward -=1;
+					//foward +=1;
+					roomLoc = 1
 					enable(false,false,false,false)
 					targetMainTextArea.value = "You re-enter the room with four doors.\n\n" + targetMainTextArea.value
-					//Questionable code below
-					//}else if(foward > 0 && backward === 0){
-						//document.getElementById("mySouthBtn").disabled = true;
-						//document.getElementById("myEastBtn").disabled = false;
-						//document.getElementById("myWestBtn").disabled = false;
-						//document.getElementById("myNorthBtn").disabled = false;
 				}else{
-					backward -=1;
-					foward +=1;
+					//backward -=1;
+					//foward +=1;
+					roomLoc = 0
 					enable(false,true,true,true)
 					targetMainTextArea.value = "Your re-enter the room you were dazed and confused in, only to find nothing interesting.\n\n" + targetMainTextArea.value
 				}
@@ -75,8 +73,10 @@
 			function myEastFunction(){
 				var targetMainTextArea = document.getElementById("taMain");
           		var targetPointTextArea = document.getElementById("pointScreen");
-				if(foward === 1 && backward === 1 && left === 0 && right === 0){
-					right +=1;
+				//if(foward === 1 && backward === 1 && left === 0 && right === 0){
+				if(roomLoc === 1){
+					//right +=1;
+					roomLoc = 2
 					enable(true,true,true,false)
 					targetMainTextArea.value = "You enter the room to the east only to find a metal door.\n\n" + targetMainTextArea.value
 					if(eastPoints === 0){
@@ -87,7 +87,8 @@
 						totalPoints +=0
 					}
 				}else{
-					left -=1;
+					//left -=1;
+					roomLoc = 1
 					enable(false,false,false,false)
 					targetMainTextArea.value = "You re-enter the room with four doors.\n\n" + targetMainTextArea.value
 				}
@@ -95,8 +96,10 @@
 			function myWestFunction(){
 				var targetMainTextArea = document.getElementById("taMain");
           		var targetPointTextArea = document.getElementById("pointScreen");
-				if(foward === 1 && backward === 1 && left === 0 && right === 0){
-					left +=1;
+				//if(foward === 1 && backward === 1 && left === 0 && right === 0){
+				if(roomLoc === 1){
+					//left +=1;
+					roomLoc = 4
 					enable(true,true,false,true)
 					targetMainTextArea.value = "You enter the room to the west to find a lounge empty of all life.\n\n" + targetMainTextArea.value
 					if(westPoints === 0){
@@ -107,7 +110,8 @@
 						totalPoints +=0
 					}
 				}else{
-					right -=1;
+					//right -=1;
+					roomLoc = 1
 					enable(false,false,false,false)
 					targetMainTextArea.value = "You re-enter the room with four doors.\n\n" + targetMainTextArea.value
 				}
