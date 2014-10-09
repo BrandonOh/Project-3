@@ -11,110 +11,110 @@
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 		<script type="text/javascript">
 			var roomLoc = 0
-			//var foward = 2
-			//var backward = 0
-			//var left = 0
-			//var right = 0
-			var northPoints = 0
-			var eastPoints = 0
-			var westPoints = 0
-			var centerPoints = 0
+			var room1_Points = 0
+			var room2_Points = 0
+			var room3_Points = 0
+			var room4_Points = 0
+			var room5_Points = 0
+			var room6_Points = 0
 			var totalPoints = 0
 			
 			function myNorthFunction(){
-          		var targetMainTextArea = document.getElementById("taMain");
           		var targetPointTextArea = document.getElementById("pointScreen");
-				//if(foward > 0 && backward === 0){
 				if(roomLoc === 0){
 					roomLoc = 1
-					//backward +=1;
-					//foward -=1;
 					enable(false,false,false,false)
-					targetMainTextArea.value = "You enter a room with four doors going in different directions.\n\n" + targetMainTextArea.value
-					if(centerPoints === 0){
+					if(room1_Points === 0){
 						totalPoints += 5
-						centerPoints += 1
+						room1_Points += 1
 						targetPointTextArea.value = "total points: " + totalPoints
 					}else{
 						totalPoints +=0
 					}
 				}else{
-					//backward +=1;
-					//foward -=1;
 					roomLoc = 3
-					enable(true,false,true,true)
-					targetMainTextArea.value = "You go into the north door to find a room full of computers.\n\n" + targetMainTextArea.value
-					if(northPoints === 0){
+					enable(true,false,true,false)
+					if(room3_Points === 0){
 						totalPoints += 5
-						northPoints += 1
+						room3_Points += 1
 						targetPointTextArea.value = "total points: " + totalPoints
 					}else{
 						totalPoints +=0
 					}
 				}
+				storyProgression()
 			}
 			function mySouthFunction() {
-          		var targetMainTextArea = document.getElementById("taMain");
-				//if(backward > 0 && foward === 0){
 				if(roomLoc === 3){
-					//backward -=1;
-					//foward +=1;
 					roomLoc = 1
 					enable(false,false,false,false)
-					targetMainTextArea.value = "You re-enter the room with four doors.\n\n" + targetMainTextArea.value
 				}else{
-					//backward -=1;
-					//foward +=1;
 					roomLoc = 0
-					enable(false,true,true,true)
-					targetMainTextArea.value = "Your re-enter the room you were dazed and confused in, only to find nothing interesting.\n\n" + targetMainTextArea.value
+					enable(false,true,true,false)
 				}
+				storyProgression()
 			}
 			function myEastFunction(){
-				var targetMainTextArea = document.getElementById("taMain");
           		var targetPointTextArea = document.getElementById("pointScreen");
-				//if(foward === 1 && backward === 1 && left === 0 && right === 0){
 				if(roomLoc === 1){
-					//right +=1;
 					roomLoc = 2
 					enable(true,true,true,false)
-					targetMainTextArea.value = "You enter the room to the east only to find a metal door.\n\n" + targetMainTextArea.value
-					if(eastPoints === 0){
+					if(room2_Points === 0){
 						totalPoints += 5
-						eastPoints += 1
+						room2_Points += 1
 						targetPointTextArea.value = "total points: " + totalPoints
 					}else{
 						totalPoints +=0
 					}
+				}else if(roomLoc === 5){
+					roomLoc = 0
+					enable(false,true,true,false)
+				}else if(roomLoc === 6){
+					roomLoc = 3
+					enable(true,false,true,false)
 				}else{
-					//left -=1;
 					roomLoc = 1
 					enable(false,false,false,false)
-					targetMainTextArea.value = "You re-enter the room with four doors.\n\n" + targetMainTextArea.value
 				}
+				storyProgression()
 			}
 			function myWestFunction(){
-				var targetMainTextArea = document.getElementById("taMain");
           		var targetPointTextArea = document.getElementById("pointScreen");
-				//if(foward === 1 && backward === 1 && left === 0 && right === 0){
 				if(roomLoc === 1){
-					//left +=1;
 					roomLoc = 4
 					enable(true,true,false,true)
-					targetMainTextArea.value = "You enter the room to the west to find a lounge empty of all life.\n\n" + targetMainTextArea.value
-					if(westPoints === 0){
+					if(room4_Points === 0){
 						totalPoints += 5
-						westPoints += 1
+						room4_Points += 1
 						targetPointTextArea.value = "total points: " + totalPoints
 					}else{
 						totalPoints +=0
 					}
+				}else if(roomLoc === 0){
+					roomLoc = 5
+					enable(true,true,false,true)
+					if(room5_Points === 0){
+						totalPoints += 5
+						room5_Points += 1
+						targetPointTextArea.value = "total points: " + totalPoints
+					}else{
+						totalPoints +=0
+					}
+				}else if(roomLoc === 3){
+					roomLoc = 6
+					enable(true,true,false,true)
+					if(room6_Points === 0){
+						totalPoints += 5
+						room6_Points += 1
+						targetPointTextArea.value = "total points: " + totalPoints
+					}else{
+						total +=0
+					}
 				}else{
-					//right -=1;
 					roomLoc = 1
 					enable(false,false,false,false)
-					targetMainTextArea.value = "You re-enter the room with four doors.\n\n" + targetMainTextArea.value
 				}
+				storyProgression()
 			}
 			
 			function enable(N,S,E,W) {
@@ -122,6 +122,28 @@
 				document.getElementById("myNorthBtn").disabled = N
 				document.getElementById("myEastBtn").disabled = E
 				document.getElementById("myWestBtn").disabled = W
+			}
+			
+			function storyProgression(){
+				var targetMainTextArea = document.getElementById("taMain");
+          		var desc = " "
+          		switch(roomLoc) {
+               		case 0: desc = "Your re-enter the room you were dazed and confused in, only to find nothing interesting.\n\n";
+                       	break;
+               		case 1: desc = "You enter a room with four doors going in different directions.\n\n";
+                       	break; 
+               		case 2: desc = "You enter the room to the east to find a metal door.\n\n";
+                       	break;
+               		case 3: desc = "You go through the door to find a room full of computers.\n\n";
+                       	break;
+               		case 4: desc = "You enter the room to the west to find a lounge empty of all life.\n\n";
+                       	break;
+                    case 5: desc = "You find a medical room full of cabinets and surgery tools.\n\n";
+                    	break;
+                    case 6: desc = "You find an elevator that seems to go to the surface\n\n"
+                    	break;
+            	}
+				targetMainTextArea.value = desc + targetMainTextArea.value
 			}
 				
 		</script>
@@ -155,7 +177,6 @@ see you laying on a pile of glass in a white room.
 				value="East">
 		
 		<input 	type="button" 
-				disabled 
 				id="myWestBtn" 
 				onclick = "myWestFunction()" 
 				value="West">
