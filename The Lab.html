@@ -24,97 +24,101 @@
 				if(roomLoc === 0){
 					roomLoc = 1
 					enable(false,false,false,false)
+					storyProgression()
 					if(room1_Points === 0){
 						totalPoints += 5
-						room1_Points += 1
+						room1_Points = 1
 						targetPointTextArea.value = "total points: " + totalPoints
-					}else{
-						totalPoints +=0
 					}
-				}else{
+				}else if(roomLoc === 1){
 					roomLoc = 3
 					enable(true,false,true,false)
+					storyProgression()
 					if(room3_Points === 0){
 						totalPoints += 5
-						room3_Points += 1
+						room3_Points = 1
 						targetPointTextArea.value = "total points: " + totalPoints
-					}else{
-						totalPoints +=0
 					}
+				}else{
+					wrongWay()
 				}
-				storyProgression()
 			}
 			function mySouthFunction() {
 				if(roomLoc === 3){
 					roomLoc = 1
 					enable(false,false,false,false)
-				}else{
+					storyProgression()
+				}else if(roomLoc === 1){
 					roomLoc = 0
 					enable(false,true,true,false)
+					storyProgression()
+				}else{
+					wrongWay()
 				}
-				storyProgression()
 			}
 			function myEastFunction(){
           		var targetPointTextArea = document.getElementById("pointScreen");
 				if(roomLoc === 1){
 					roomLoc = 2
 					enable(true,true,true,false)
+					storyProgression()
 					if(room2_Points === 0){
 						totalPoints += 5
-						room2_Points += 1
+						room2_Points = 1
 						targetPointTextArea.value = "total points: " + totalPoints
-					}else{
-						totalPoints +=0
 					}
 				}else if(roomLoc === 5){
 					roomLoc = 0
 					enable(false,true,true,false)
+					storyProgression()
 				}else if(roomLoc === 6){
 					roomLoc = 3
 					enable(true,false,true,false)
-				}else{
+					storyProgression()
+				}else if(roomLoc === 4){
 					roomLoc = 1
 					enable(false,false,false,false)
+					storyProgression()
+				}else{
+					wrongWay()
 				}
-				storyProgression()
 			}
 			function myWestFunction(){
           		var targetPointTextArea = document.getElementById("pointScreen");
 				if(roomLoc === 1){
 					roomLoc = 4
 					enable(true,true,false,true)
+					storyProgression()
 					if(room4_Points === 0){
 						totalPoints += 5
-						room4_Points += 1
+						room4_Points = 1
 						targetPointTextArea.value = "total points: " + totalPoints
-					}else{
-						totalPoints +=0
 					}
 				}else if(roomLoc === 0){
 					roomLoc = 5
 					enable(true,true,false,true)
+					storyProgression()
 					if(room5_Points === 0){
 						totalPoints += 5
-						room5_Points += 1
+						room5_Points = 1
 						targetPointTextArea.value = "total points: " + totalPoints
-					}else{
-						totalPoints +=0
 					}
 				}else if(roomLoc === 3){
 					roomLoc = 6
 					enable(true,true,false,true)
+					storyProgression()
 					if(room6_Points === 0){
 						totalPoints += 5
-						room6_Points += 1
+						room6_Points = 1
 						targetPointTextArea.value = "total points: " + totalPoints
-					}else{
-						total +=0
 					}
-				}else{
+				}else if(roomLoc === 2){
 					roomLoc = 1
 					enable(false,false,false,false)
+					storyProgression()
+				}else{
+					wrongWay()
 				}
-				storyProgression()
 			}
 			
 			function enable(N,S,E,W) {
@@ -128,22 +132,44 @@
 				var targetMainTextArea = document.getElementById("taMain");
           		var desc = " "
           		switch(roomLoc) {
-               		case 0: desc = "Your re-enter the room you were dazed and confused in, only to find nothing interesting.\n\n";
+               		case 0: desc = "South: Your re-enter the room you were dazed and confused in, only to find nothing interesting.\n\n";
                        	break;
-               		case 1: desc = "You enter a room with four doors going in different directions.\n\n";
+               		case 1: desc = "Center: You enter a room with four doors going in different directions.\n\n";
                        	break; 
-               		case 2: desc = "You enter the room to the east to find a metal door.\n\n";
+               		case 2: desc = "East: You enter the room to the east to find a metal door.\n\n";
                        	break;
-               		case 3: desc = "You go through the door to find a room full of computers.\n\n";
+               		case 3: desc = "North: You go through the door to find a room full of computers.\n\n";
                        	break;
-               		case 4: desc = "You enter the room to the west to find a lounge empty of all life.\n\n";
+               		case 4: desc = "West: You enter the room to the west to find a lounge empty of all life.\n\n";
                        	break;
-                    case 5: desc = "You find a medical room full of cabinets and surgery tools.\n\n";
+                    case 5: desc = "SouthWest: You find a medical room full of cabinets and surgery tools.\n\n";
                     	break;
-                    case 6: desc = "You find an elevator that seems to go to the surface\n\n"
+                    case 6: desc = "NorthWest: You find an elevator that seems to go to the surface.\n\n";
                     	break;
+                    default: desc = "Default: There is a wall there.\n\n";
             	}
 				targetMainTextArea.value = desc + targetMainTextArea.value
+			}
+			
+			function btnGo_click(){
+				var targetMainTextArea = document.getElementById("taMain");
+				var input = document.getElementById("txtCommand").value;
+				if (input === "n" || input === "N"){
+					myNorthFunction()
+				}else if (input === "s" || input === "S"){
+					mySouthFunction()
+				}else if (input === "e" || input === "E"){
+					myEastFunction()
+				}else if (input === "w" || input === "W"){
+					myWestFunction()
+				}else{
+					targetMainTextArea.value = "I do not understand that action.\n\n" + targetMainTextArea.value
+				}
+			}
+			
+			function wrongWay(){
+				var targetMainTextArea = document.getElementById("taMain");
+				targetMainTextArea.value = "There is no door that way.\n\n" + targetMainTextArea.value
 			}
 				
 		</script>
@@ -157,8 +183,19 @@ see you laying on a pile of glass in a white room.
 </textarea>
 
 		<textarea rows="2" cols = "8" id="pointScreen"></textarea>
+		
 		<br>
+		
+		<input type="text" 
+               id = "txtCommand"
+               name="txtCommand">
+               
+        <input type="button"
+               value="Go" 
+               onclick="btnGo_click();" />
+              
 		<br>
+		
 		<input 	type="button"
 				id="myNorthBtn" 
 				onclick = "myNorthFunction()" 
