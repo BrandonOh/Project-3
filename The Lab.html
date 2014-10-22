@@ -154,13 +154,13 @@
 			function btnGo_click(){
 				var targetMainTextArea = document.getElementById("taMain");
 				var input = document.getElementById("txtCommand").value;
-				if (input === "n" || input === "N"){
+				if (input === "n" || input === "N" || input === "north" || input === "North"){
 					myNorthFunction()
-				}else if (input === "s" || input === "S"){
+				}else if (input === "s" || input === "S" || input === "south" || input === "South"){
 					mySouthFunction()
-				}else if (input === "e" || input === "E"){
+				}else if (input === "e" || input === "E" || input === "east" || input === "East"){
 					myEastFunction()
-				}else if (input === "w" || input === "W"){
+				}else if (input === "w" || input === "W" || input === "west" || input === "West"){
 					myWestFunction()
 				}else{
 					targetMainTextArea.value = "I do not understand that action.\n\n" + targetMainTextArea.value
