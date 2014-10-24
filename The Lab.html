@@ -151,6 +151,12 @@
 				targetMainTextArea.value = desc + targetMainTextArea.value
 			}
 			
+			function help(){
+			var targetMainTextArea = document.getElementById("taMain");
+			targetMainTextArea.value = "commands that are valid are:\n\nTo go South = S, s, South, south\n\nTo go North = N, n, North, north\n\nTo go East = E,e,East,east\n\nTo go West = W,w,West,west"
+			
+			}
+			
 			function btnGo_click(){
 				var targetMainTextArea = document.getElementById("taMain");
 				var input = document.getElementById("txtCommand").value;
@@ -162,8 +168,10 @@
 					myEastFunction()
 				}else if (input === "w" || input === "W" || input === "west" || input === "West"){
 					myWestFunction()
+				}else if (input === "help" || input === "Help"){
+					help()
 				}else{
-					targetMainTextArea.value = "I do not understand that action.\n\n" + targetMainTextArea.value
+					targetMainTextArea.value = "I do not understand that action " + input + ".Please type Help for possible actions. \n\n" + targetMainTextArea.value
 				}
 			}
 			
